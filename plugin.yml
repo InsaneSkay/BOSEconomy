@@ -1,0 +1,303 @@
+name: BOSEconomy
+main: cosine.boseconomy.BOSEconomy
+version: 0.7.8.1
+authors: [Cosine, ievans3024]
+website: http://dev.bukkit.org/bukkit-mods/boseconomy/
+softdepend: [VanishNoPacket]
+
+commands:
+  boseconomy:
+    description: The root BOSEconomy command.
+    aliases: [ec, econ, bosecon]
+  pay:
+    description: Pays money to other players.
+  money:
+    description: Displays how much money you have.
+    aliases: [wallet]
+
+permissions:
+
+  BOSEconomy.*:
+    description: All BOSEconomy command permissions.
+    default: false
+    children:
+      BOSEconomy.accountgroup.*: true
+      BOSEconomy.common.*: true
+      BOSEconomy.admin.*: true
+
+  BOSEconomy.accountgroup.*:
+    description: Account group permissions.
+    default: false
+    children:
+      BOSEconomy.accountgroup.players: true
+      BOSEconomy.accountgroup.banks: true
+      BOSEconomy.accountgroup.brackets: true
+      BOSEconomy.accountgroup.general.*: true
+
+  BOSEconomy.accountgroup.players:
+    default: true
+  BOSEconomy.accountgroup.banks:
+    default: true
+  BOSEconomy.accountgroup.brackets:
+    default: false
+
+  BOSEconomy.accountgroup.general.*:
+    description: General subset permissions for account groups.
+    default: false
+    children:
+      BOSEconomy.accountgroup.general.online: true
+      BOSEconomy.accountgroup.general.offline: true
+      BOSEconomy.accountgroup.general.players: true
+      BOSEconomy.accountgroup.general.banks: true
+
+  BOSEconomy.accountgroup.general.online:
+    default: false
+  BOSEconomy.accountgroup.general.offline:
+    default: false
+  BOSEconomy.accountgroup.general.players:
+    default: false
+  BOSEconomy.accountgroup.general.banks:
+    default: false
+
+  BOSEconomy.common.*:
+    description: Common permissions.
+    default: true
+    children:
+      BOSEconomy.common.wallet: true
+      BOSEconomy.common.income: true
+      BOSEconomy.common.mastery: true
+      BOSEconomy.common.pay: true
+      BOSEconomy.common.stats: true
+      BOSEconomy.common.top5: true
+      BOSEconomy.common.bracket.*: true
+      BOSEconomy.common.bank.*: true
+      BOSEconomy.common.request.*: true
+      BOSEconomy.common.about: true
+      BOSEconomy.common.help: true
+
+  BOSEconomy.common.wallet:
+    default: true
+  BOSEconomy.common.income:
+    default: true
+  BOSEconomy.common.mastery:
+    default: true
+  BOSEconomy.common.pay:
+    default: true
+  BOSEconomy.common.stats:
+    default: true
+  BOSEconomy.common.top5:
+    default: true
+
+  BOSEconomy.common.bracket.*:
+    description: Common bracket permissions.
+    default: true
+    children:
+      BOSEconomy.common.bracket.rename: true
+      BOSEconomy.common.bracket.info: true
+      BOSEconomy.common.bracket.set: true
+      BOSEconomy.common.bracket.listmembers: true
+      BOSEconomy.common.bracket.addmember: true
+      BOSEconomy.common.bracket.removemember: true
+      BOSEconomy.common.bracket.setmultiplier: true
+
+  BOSEconomy.common.bracket.rename:
+    default: true
+  BOSEconomy.common.bracket.info:
+    default: true
+  BOSEconomy.common.bracket.set:
+    default: true
+  BOSEconomy.common.bracket.listmembers:
+    default: true
+  BOSEconomy.common.bracket.addmember:
+    default: true
+  BOSEconomy.common.bracket.removemember:
+    default: true
+  BOSEconomy.common.bracket.setmultiplier:
+    default: true
+
+  BOSEconomy.common.bank.*:
+    description: Common bank permissions.
+    default: true
+    children:
+      BOSEconomy.common.bank.rename: true
+      BOSEconomy.common.bank.list: true
+      BOSEconomy.common.bank.info: true
+      BOSEconomy.common.bank.mastery: true
+      BOSEconomy.common.bank.withdraw: true
+      BOSEconomy.common.bank.deposit: true
+      BOSEconomy.common.bank.addowner: true
+      BOSEconomy.common.bank.addmember: true
+      BOSEconomy.common.bank.removemember: true
+      BOSEconomy.common.bank.listmembers: true
+
+  BOSEconomy.common.bank.rename:
+    default: true
+  BOSEconomy.common.bank.list:
+    default: true
+  BOSEconomy.common.bank.info:
+    default: true
+  BOSEconomy.common.bank.mastery:
+    default: true
+  BOSEconomy.common.bank.withdraw:
+    default: true
+  BOSEconomy.common.bank.deposit:
+    default: true
+  BOSEconomy.common.bank.addowner:
+    default: true
+  BOSEconomy.common.bank.addmember:
+    default: true
+  BOSEconomy.common.bank.removemember:
+    default: true
+  BOSEconomy.common.bank.listmembers:
+    default: true
+
+  BOSEconomy.common.request.*:
+    description: Common request permissions.
+    default: true
+    children:
+      BOSEconomy.common.request.list: true
+      BOSEconomy.common.request.do: true
+
+  BOSEconomy.common.request.list:
+    default: true
+  BOSEconomy.common.request.do:
+    default: true
+
+  BOSEconomy.common.about:
+    default: true
+    
+  BOSEconomy.common.help:
+    default: true
+
+  BOSEconomy.admin.*:
+    description: Administrator permissions.
+    default: false
+    children:
+      BOSEconomy.admin.money.*: true
+      BOSEconomy.admin.viewmastery: true
+      BOSEconomy.admin.reload: true
+      BOSEconomy.admin.save: true
+      BOSEconomy.admin.bracket.*: true
+      BOSEconomy.admin.bank.*: true
+      BOSEconomy.admin.payday.*: true
+
+  BOSEconomy.admin.money.*:
+    description: Administrator money permissions.
+    default: false
+    children:
+      BOSEconomy.admin.money.info: true
+      BOSEconomy.admin.money.set: true
+      BOSEconomy.admin.money.add: true
+      BOSEconomy.admin.money.sub: true
+      BOSEconomy.admin.money.clear: true
+      BOSEconomy.admin.money.scale: true
+
+  BOSEconomy.admin.money.info:
+    default: false
+  BOSEconomy.admin.money.set:
+    default: false
+  BOSEconomy.admin.money.add:
+    default: false
+  BOSEconomy.admin.money.sub:
+    default: false
+  BOSEconomy.admin.money.clear:
+    default: false
+  BOSEconomy.admin.money.scale:
+    default: false
+
+  BOSEconomy.admin.viewmastery:
+    default: false
+  BOSEconomy.admin.reload:
+    default: false
+  BOSEconomy.admin.save:
+    default: false
+
+  BOSEconomy.admin.bracket.*:
+    description: Administrator bracket permissions.
+    default: false
+    children:
+      BOSEconomy.admin.bracket.create: true
+      BOSEconomy.admin.bracket.remove: true
+      BOSEconomy.admin.bracket.rename: true
+      BOSEconomy.admin.bracket.list: true
+      BOSEconomy.admin.bracket.info: true
+      BOSEconomy.admin.bracket.set: true
+      BOSEconomy.admin.bracket.listmembers: true
+      BOSEconomy.admin.bracket.addmember: true
+      BOSEconomy.admin.bracket.removemember: true
+      BOSEconomy.admin.bracket.setmultiplier: true
+      BOSEconomy.admin.bracket.clear: true
+
+  BOSEconomy.admin.bracket.create:
+    default: false
+  BOSEconomy.admin.bracket.remove:
+    default: false
+  BOSEconomy.admin.bracket.rename:
+    default: false
+  BOSEconomy.admin.bracket.list:
+    default: false
+  BOSEconomy.admin.bracket.info:
+    default: false
+  BOSEconomy.admin.bracket.set:
+    default: false
+  BOSEconomy.admin.bracket.listmembers:
+    default: false
+  BOSEconomy.admin.bracket.addmember:
+    default: false
+  BOSEconomy.admin.bracket.removemember:
+    default: false
+  BOSEconomy.admin.bracket.setmultiplier:
+    default: false
+  BOSEconomy.admin.bracket.clear:
+    default: false
+
+  BOSEconomy.admin.bank.*:
+    description: Administrator bank permissions.
+    default: false
+    children:
+      BOSEconomy.admin.bank.create: true
+      BOSEconomy.admin.bank.remove: true
+      BOSEconomy.admin.bank.rename: true
+      BOSEconomy.admin.bank.list: true
+      BOSEconomy.admin.bank.info: true
+      BOSEconomy.admin.bank.mastery: true
+      BOSEconomy.admin.bank.listmembers: true
+      BOSEconomy.admin.bank.withdraw: true
+      BOSEconomy.admin.bank.deposit: true
+      BOSEconomy.admin.bank.addowner: true
+      BOSEconomy.admin.bank.addmember: true
+      BOSEconomy.admin.bank.removemember: true
+
+  BOSEconomy.admin.bank.create:
+    default: false
+  BOSEconomy.admin.bank.remove:
+    default: false
+  BOSEconomy.admin.bank.rename:
+    default: false
+  BOSEconomy.admin.bank.list:
+    default: false
+  BOSEconomy.admin.bank.info:
+    default: false
+  BOSEconomy.admin.bank.mastery:
+    default: false
+  BOSEconomy.admin.bank.listmembers:
+    default: false
+  BOSEconomy.admin.bank.withdraw:
+    default: false
+  BOSEconomy.admin.bank.deposit:
+    default: false
+  BOSEconomy.admin.bank.addowner:
+    default: false
+  BOSEconomy.admin.bank.addmember:
+    default: false
+  BOSEconomy.admin.bank.removemember:
+    default: false
+
+  BOSEconomy.admin.payday.*:
+    description: Administrator payday permissions.
+    default: false
+    children:
+      BOSEconomy.admin.payday.reset: true
+
+  BOSEconomy.admin.payday.reset:
+    default: false
